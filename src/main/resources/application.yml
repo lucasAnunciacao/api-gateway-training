@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ms-client
+          uri: "lb://ms-client"
+          predicates:
+            - Path=/v1/client/**, /v1/professor/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
